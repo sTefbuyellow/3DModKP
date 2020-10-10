@@ -7,7 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
           <root url="jar://$USER_HOME$/opencv/build/java/opencv-430.jar!/" />
@@ -15,6 +15,17 @@
         <JAVADOC />
         <SOURCES>
           <root url="jar://$USER_HOME$/opencv/build/java/opencv-430.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/opencv/build/java/opencv-440.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/opencv/build/java/opencv-440.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>

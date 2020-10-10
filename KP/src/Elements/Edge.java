@@ -1,8 +1,5 @@
 package Elements;
 
-
-import Operations.SystemOperations;
-
 public class Edge {
     private Point point1;
     private Point point2;

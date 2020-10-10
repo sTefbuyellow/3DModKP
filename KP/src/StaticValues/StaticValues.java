@@ -26,6 +26,7 @@ public class StaticValues {
     public static final int KEY_RIGHT = 39;
     public static final int KEY_SCALING_PLUS = 46;
     public static final int KEY_SCALING_MINUS = 44;
+    public static final long FPS = 60;
     public static double coneHeight;
     public static double radius1;
     public static double radius2;

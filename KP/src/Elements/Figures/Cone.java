@@ -60,5 +60,6 @@ public class Cone implements Figure {
     }
 
     public void faceLaw() {
+        //TODO: fill dat shiat
     }
 }
