@@ -13,7 +13,7 @@ public class RotationOperations {
         for(Point point : points) {
             Mat mat = SystemOperations.createMatrix(new double[]{1, 0, 0, 0, 0, Math.cos(angle), -Math.sin(angle), 0,
                     0, Math.sin(angle), Math.cos(angle), 0, 0, 0, 0, 1});
-            SystemOperations.matrixMultiplying(point, mat);
+            point.setCoordinates(SystemOperations.matrixMultiplying(point.getCoordinates(), mat));
         }
     }
 
@@ -21,7 +21,7 @@ public class RotationOperations {
         for(Point point : points) {
             Mat mat = SystemOperations.createMatrix(new double[]{Math.cos(angle), 0, Math.sin(angle), 0, 0, 1, 0, 0,
                     -Math.sin(angle), 0, Math.cos(angle), 0, 0, 0, 0, 1});
-            SystemOperations.matrixMultiplying(point, mat);
+            point.setCoordinates(SystemOperations.matrixMultiplying(point.getCoordinates(), mat));
         }
     }
 
@@ -29,7 +29,22 @@ public class RotationOperations {
         for(Point point : points) {
             Mat mat = SystemOperations.createMatrix(new double[]{Math.cos(angle), -Math.sin(angle),
                     0, 0, Math.sin(angle), Math.cos(angle), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1});
-            SystemOperations.matrixMultiplying(point, mat);
+            point.setCoordinates(SystemOperations.matrixMultiplying(point.getCoordinates(), mat));
         }
+    }
+
+    public static Mat getXRotationMatrix(double angle){
+       return SystemOperations.createMatrix(new double[]{1, 0, 0, 0, 0, Math.cos(angle), -Math.sin(angle), 0,
+                0, Math.sin(angle), Math.cos(angle), 0, 0, 0, 0, 1});
+    }
+
+    public static Mat getYRotationMatrix(double angle){
+        return SystemOperations.createMatrix(new double[]{Math.cos(angle), 0, Math.sin(angle), 0, 0, 1, 0, 0,
+                -Math.sin(angle), 0, Math.cos(angle), 0, 0, 0, 0, 1});
+    }
+
+    public static Mat getZRotationMatrix(double angle){
+        return SystemOperations.createMatrix(new double[]{Math.cos(angle), -Math.sin(angle),
+                0, 0, Math.sin(angle), Math.cos(angle), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1});
     }
 }

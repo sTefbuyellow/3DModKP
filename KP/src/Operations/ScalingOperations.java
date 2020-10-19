@@ -10,7 +10,12 @@ public class ScalingOperations {
         for(Point point : points) {
             Mat mat = SystemOperations.createMatrix(new double[]{ix, 0, 0, 0, 0, iy, 0, 0,
                     0, 0, iz, 0, 0, 0, 0, 1});
-            SystemOperations.matrixMultiplying(point, mat);
+            point.setCoordinates(SystemOperations.matrixMultiplying(point.getCoordinates(), mat));
         }
+    }
+
+    public static Mat getScalingMat(double ix, double iy, double iz){
+        return SystemOperations.createMatrix(new double[]{ix, 0, 0, 0, 0, iy, 0, 0,
+                0, 0, iz, 0, 0, 0, 0, 1});
     }
 }

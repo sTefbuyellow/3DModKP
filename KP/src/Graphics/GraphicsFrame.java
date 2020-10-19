@@ -8,30 +8,29 @@ import StaticValues.StaticValues;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 
 public class GraphicsFrame extends JFrame {
 
-    GraphicsPanel panel;
-    Button up = new Button();
-    Button down = new Button();
-    Button left = new Button();
-    Button right = new Button();
+    public static GraphicsPanel graphicsPanel;
+    MenuPanel menuPanel;
+
 
     public GraphicsFrame() {
         StaticValues.width = getToolkit().getScreenSize().width;
         StaticValues.height = getToolkit().getScreenSize().height;
         setSize(StaticValues.width, StaticValues.height);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(10, 10));
-        panel = new GraphicsPanel();
-        add(up);
-        add(down);
-        add(left);
-        add(right);
-        add(panel);
+        setLayout(new GridLayout(1,2, 5,5));
+        createPanels();
         setVisible(true);
+        addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent e) {
+                StaticValues.width = getWidth();
+                StaticValues.height = getHeight();
+                setSize(StaticValues.width, StaticValues.height);
+            }
+        });
 
         this.addKeyListener(new KeyAdapter() {
             @Override
@@ -112,9 +111,16 @@ public class GraphicsFrame extends JFrame {
                                 0.9, 0.9, 0.9);
                         break;
                 }
-                panel.repaint();
+                graphicsPanel.repaint();
             }
         });
 
+    }
+
+    public void createPanels(){
+        graphicsPanel = new GraphicsPanel();
+        menuPanel = new MenuPanel();
+        getContentPane().add(graphicsPanel);
+        getContentPane().add(menuPanel);
     }
 }

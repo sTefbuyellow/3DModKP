@@ -6,6 +6,8 @@ import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 
+import java.util.ArrayList;
+
 
 public class SystemOperations {
 
@@ -18,7 +20,7 @@ public class SystemOperations {
     }
 
     public static double correctX(double x){
-        return (double) StaticValues.width / 2 + x;
+        return (double) StaticValues.width / 4 + x;
     }
 
     public static double correctY(double y){
@@ -29,15 +31,21 @@ public class SystemOperations {
         return (double) StaticValues.width / 2 + z;
     }
 
-    public static void matrixMultiplying(Point point, Mat matrix) {
+    public static Mat matrixMultiplying(Mat mat1, Mat mat2) {
         Mat returnable = new Mat(4, 4, CvType.CV_64F);
-        Core.gemm(matrix, point.getCoordinates(), 1, new Mat(), 0, returnable);
-        point.setCoordinates(returnable);
+        Core.gemm(mat2, mat1, 1, new Mat(), 0, returnable);
+        return returnable;
     }
 
     public static Mat createMatrix(double[] elements) {
         Mat mat = new Mat(4, 4, CvType.CV_64F);
         mat.put(0, 0, elements);
         return mat;
+    }
+
+    public static void getMultipliedPoints(ArrayList<Point> points, Mat mat){
+        for(Point point : points) {
+            point.setCoordinates(SystemOperations.matrixMultiplying(point.getCoordinates(), mat));
+        }
     }
 }
