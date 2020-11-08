@@ -1,6 +1,7 @@
-package Operations;
+package Operations.Geometry;
 
 import Elements.Point;
+import Operations.SystemOperations;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;

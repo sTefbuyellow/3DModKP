@@ -38,6 +38,7 @@ public class Cone implements Figure {
     public ArrayList<Edge> getEdges() {
         return edges;
     }
+    
 
     public void pointLaw() {
         double alpha1 = 0;
@@ -61,5 +62,17 @@ public class Cone implements Figure {
 
     public void faceLaw() {
         //TODO: fill dat shiat
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public double getApproximationNumber() {
+        return approximationNumber;
     }
 }

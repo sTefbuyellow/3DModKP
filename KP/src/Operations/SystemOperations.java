@@ -20,7 +20,7 @@ public class SystemOperations {
     }
 
     public static double correctX(double x){
-        return (double) StaticValues.width / 4 + x;
+        return (double) StaticValues.width / 2 + x;
     }
 
     public static double correctY(double y){
