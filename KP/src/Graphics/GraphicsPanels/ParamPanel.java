@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 
 public class ParamPanel extends JPanel {
 
-
     JLabel titleLabel = new JLabel("Параметры");
     JLabel heightLabel = new JLabel("Высота");
     JLabel radius1Label = new JLabel("Радиус 1");
@@ -119,9 +118,9 @@ public class ParamPanel extends JPanel {
 
     public void createFigures() {
         StaticValues.cone1 = new Cone(Double.parseDouble(height.getText()), Double.parseDouble(radius1.getText()),
-                Double.parseDouble(approximationNumber1.getText()));
+                Integer.parseInt(approximationNumber1.getText()), false);
         StaticValues.cone2 = new Cone(Double.parseDouble(height.getText()), Double.parseDouble(radius2.getText()),
-                Double.parseDouble(approximationNumber2.getText()));
+                Integer.parseInt(approximationNumber2.getText()), true);
     }
 
     public void setJTextFieldAlignment(JTextField[] fields) {

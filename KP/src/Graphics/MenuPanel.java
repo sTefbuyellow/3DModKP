@@ -1,6 +1,7 @@
 package Graphics;
 
 import Graphics.GraphicsPanels.*;
+import Operations.Geometry.InvisibleLines;
 import StaticValues.StaticValues;
 
 import javax.swing.*;
@@ -12,6 +13,7 @@ public class MenuPanel extends JPanel {
     JPanel panel2;
     JPanel panel3;
     JPanel panel4;
+    JPanel panel5;
 
     public MenuPanel() {
         setBackground(new Color(150, 150, 150));
@@ -23,10 +25,12 @@ public class MenuPanel extends JPanel {
         createPanel2();
         createPanel3();
         createPanel4();
+        createPanel5();
         tabbedPane.addTab("Panel1", panel1);
         tabbedPane.addTab("Panel2", panel2);
         tabbedPane.addTab("Panel3", panel3);
         tabbedPane.addTab("Panel4", panel4);
+        tabbedPane.addTab("Panel5", panel5);
         add(tabbedPane);
     }
 
@@ -61,6 +65,13 @@ public class MenuPanel extends JPanel {
         panel4.setLayout(new GridLayout(1,1,20,20));
         PerspectiveProjectionPanel panel = new PerspectiveProjectionPanel();
         panel4.add(panel);
+    }
+
+    public void createPanel5(){
+        panel5 = createPanel();
+        panel5.setLayout(new GridLayout(1,1,20,20));
+        ViewPanel viewPanel = new ViewPanel();
+        panel5.add(viewPanel);
     }
 
 

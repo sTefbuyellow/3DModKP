@@ -5,30 +5,32 @@ import Elements.Edge;
 import Elements.Face;
 import Elements.Figure;
 import Elements.Point;
-import Operations.SystemOperations;
-import StaticValues.StaticValues;
 
+import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class Cone implements Figure {
 
+    boolean isHole;
     double height;
     double radius;
-    double approximationNumber;
+    int approximationNumber;
     double alpha;
+    int flag = 0;
     ArrayList<Face> faces = new ArrayList<Face>();
     ArrayList<Point> points = new ArrayList<Point>();
     ArrayList<Edge> edges = new ArrayList<Edge>();
 
-    public Cone(double height, double radius, double approximationNumber) {
+    public Cone(double height, double radius, int approximationNumber, boolean isHole) {
         this.radius = radius;
         this.height = height;
         this.approximationNumber = approximationNumber;
-        this.alpha = 360 / approximationNumber;
+        this.alpha = 360 / (double) approximationNumber;
+        this.isHole = isHole;
         pointLaw();
         edgeLaw();
+        faceLaw();
+        setFacesPoints();
     }
 
     public ArrayList<Point> getPoints() {
@@ -38,7 +40,18 @@ public class Cone implements Figure {
     public ArrayList<Edge> getEdges() {
         return edges;
     }
-    
+
+    public ArrayList<Face> getFaces() {
+        return faces;
+    }
+
+    public int getApproximationNumber() {
+        return approximationNumber;
+    }
+
+    public boolean isHole() {
+        return isHole;
+    }
 
     public void pointLaw() {
         double alpha1 = 0;
@@ -53,6 +66,8 @@ public class Cone implements Figure {
     public void edgeLaw() {
         for (int i = 1; i < points.size(); i++) {
             edges.add(new Edge(points.get(0), points.get(i)));
+            flag = i;
+            System.out.println(i);
         }
         for (int i = 2; i < points.size(); i++) {
             edges.add(new Edge(points.get(i - 1), points.get(i)));
@@ -61,18 +76,44 @@ public class Cone implements Figure {
     }
 
     public void faceLaw() {
-        //TODO: fill dat shiat
+        for (int i = 0; i < flag; i++) {
+            ArrayList<Edge> face = new ArrayList<Edge>();
+            face.add(edges.get(i));
+            if (i == flag - 1)
+                face.add(edges.get(0));
+            else
+                face.add(edges.get(i + 1));
+            face.add(edges.get(i + flag));
+            faces.add(new Face(face));
+        }
+        if(!isHole()) {
+            ArrayList<Edge> face = new ArrayList<Edge>();
+            for (int i = flag; i < edges.size(); i++) {
+                face.add(edges.get(i));
+            }
+            faces.add(new Face(face));
+        }
     }
 
-    public double getHeight() {
-        return height;
-    }
-
-    public double getRadius() {
-        return radius;
-    }
-
-    public double getApproximationNumber() {
-        return approximationNumber;
+    public void setFacesPoints() {
+        for (int i = 1; i < approximationNumber; i++) {
+            faces.get(i - 1).setPoint(points.get(0));
+            faces.get(i - 1).setPoint(points.get(i));
+            faces.get(i - 1).setPoint(points.get(i + 1));
+        }
+        if(!isHole()) {
+            faces.get(faces.size() - 2).setPoint(points.get(0));
+            faces.get(faces.size() - 2).setPoint(points.get(points.size() - 1));
+            faces.get(faces.size() - 2).setPoint(points.get(1));
+            for (int i = approximationNumber - 1; i > 1; i--) {
+                Face face = faces.get(faces.size() - 1);
+                face.setPoint(points.get(i));
+            }
+        }
+        else {
+            faces.get(faces.size() - 1).setPoint(points.get(0));
+            faces.get(faces.size() - 1).setPoint(points.get(points.size() - 1));
+            faces.get(faces.size() - 1).setPoint(points.get(1));
+        }
     }
 }

@@ -15,8 +15,8 @@ public class SharpAngleProjectionPanel extends JPanel {
     JLabel titleLabel = new JLabel("Косоугольная проекция");
     JLabel angleLabel = new JLabel("Угол α (°)");
     JLabel lValueLabel = new JLabel("Параметр L");
-    JTextField angle = new JTextField("0");
-    JTextField lValue = new JTextField("0");
+    JTextField angle = new JTextField("0.5");
+    JTextField lValue = new JTextField("30");
     JButton refreshButton = new JButton("Построить");
 
     public SharpAngleProjectionPanel() {

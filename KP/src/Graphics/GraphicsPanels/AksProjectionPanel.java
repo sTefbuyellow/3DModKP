@@ -14,8 +14,8 @@ public class AksProjectionPanel extends JPanel {
     JLabel titleLabel = new JLabel("Аксонометрическая проекция");
     JLabel firstAngleLabel = new JLabel("Угол ψ (°)");
     JLabel secondAngleLabel = new JLabel("Угол φ (°)");
-    JTextField firstAngle = new JTextField("0");
-    JTextField secondAngle = new JTextField("0");
+    JTextField firstAngle = new JTextField("30");
+    JTextField secondAngle = new JTextField("30");
     JButton refreshButton = new JButton("Построить");
 
     public AksProjectionPanel(){
