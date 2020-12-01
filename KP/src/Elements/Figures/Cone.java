@@ -33,6 +33,18 @@ public class Cone implements Figure {
         setFacesPoints();
     }
 
+    public Cone(Cone cone){
+        this.isHole = cone.isHole();
+        this.height = cone.height;
+        this.radius = cone.radius;
+        this.approximationNumber = cone.approximationNumber;
+        this.alpha = cone.alpha;
+        this.flag = cone.flag;
+        this.faces = new ArrayList<>(cone.getFaces());
+        this.points = new ArrayList<>(cone.getPoints());
+        this.edges = new ArrayList<>(cone.getEdges());
+    }
+
     public ArrayList<Point> getPoints() {
         return points;
     }
@@ -47,6 +59,10 @@ public class Cone implements Figure {
 
     public int getApproximationNumber() {
         return approximationNumber;
+    }
+
+    public Cone getCopy(){
+        return new Cone(this);
     }
 
     public boolean isHole() {

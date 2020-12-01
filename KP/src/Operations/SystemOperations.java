@@ -19,21 +19,21 @@ public class SystemOperations {
         return new double[]{(double) StaticValues.width / 2 + x, (double) StaticValues.height / 2 + y, (double) StaticValues.height / 2 + z, 1};
     }
 
-    public static double correctX(double x){
+    public static double correctX(double x) {
         return (double) StaticValues.width / 2 + x;
     }
 
-    public static double correctY(double y){
+    public static double correctY(double y) {
         return (double) StaticValues.height / 2 + y;
     }
 
-    public static double correctZ(double z){
+    public static double correctZ(double z) {
         return (double) StaticValues.width / 2 + z;
     }
 
     public static Mat matrixMultiplying(Mat mat1, Mat mat2) {
-        Mat returnable = new Mat(4, 4, CvType.CV_64F);
-        Core.gemm(mat2, mat1, 1, new Mat(), 0, returnable);
+        Mat returnable = new Mat();
+        Core.gemm(mat1, mat2, 1, new Mat(), 0, returnable);
         return returnable;
     }
 
@@ -43,9 +43,22 @@ public class SystemOperations {
         return mat;
     }
 
-    public static void getMultipliedPoints(ArrayList<Point> points, Mat mat){
-        for(Point point : points) {
+    public static void getMultipliedPoints(ArrayList<Point> points, Mat mat) {
+        for (Point point : points) {
             point.setCoordinates(SystemOperations.matrixMultiplying(point.getCoordinates(), mat));
+        }
+    }
+
+    public static void getNormalizedPoints(ArrayList<Point> points) {
+        for (Point point : points) {
+            double[] values = new double[4];
+            values[0] = point.getX() / point.getD();
+            values[1] = point.getY() / point.getD();
+            values[2] = point.getZ() / point.getD();
+            values[3] = 1;
+            Mat temp = new Mat(1,4, CvType.CV_64F);
+            temp.put(0,0,values);
+            point.setCoordinates(temp);
         }
     }
 }

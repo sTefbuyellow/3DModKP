@@ -2,8 +2,11 @@ package Graphics.GraphicsPanels;
 
 import Operations.SystemOperations;
 import StaticValues.StaticValues;
+import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import Graphics.GraphicsFrame;
+import org.opencv.core.Scalar;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,17 +17,17 @@ public class PerspectiveProjectionPanel extends JPanel {
 
     JLabel titleLabel = new JLabel("Perspective");
     JLabel dLabel = new JLabel("Параметр d");
-    JTextField dValue = new JTextField("0");
+    JTextField dValue = new JTextField("250");
     JLabel roLabel = new JLabel("Параметр ρ");
-    JTextField roValue = new JTextField("0");
+    JTextField roValue = new JTextField("300");
     JLabel fiLabel = new JLabel("Угол φ (°)");
     JTextField fiValue = new JTextField("0");
     JLabel thetaLabel = new JLabel("Угол θ (°)");
-    JTextField thetaValue = new JTextField("0");
+    JTextField thetaValue = new JTextField("90");
     JButton refreshButton = new JButton("Построить");
 
-    public PerspectiveProjectionPanel(){
-        setBackground(new Color(220,220,220));
+    public PerspectiveProjectionPanel() {
+        setBackground(new Color(220, 220, 220));
 
         ActionListener listener = new PerspectiveButtonListener();
         refreshButton.addActionListener(listener);
@@ -41,7 +44,7 @@ public class PerspectiveProjectionPanel extends JPanel {
         createButtonConstrains(constraints);
     }
 
-    public void createLabelConstrains(GridBagConstraints constraints){
+    public void createLabelConstrains(GridBagConstraints constraints) {
         constraints.weighty = 1;
         constraints.weightx = 0.5;
 
@@ -61,7 +64,7 @@ public class PerspectiveProjectionPanel extends JPanel {
         add(roLabel, constraints);
     }
 
-    public void createTextConstrains(GridBagConstraints constraints){
+    public void createTextConstrains(GridBagConstraints constraints) {
         constraints.ipadx = 40;
         constraints.gridx = 1;
         constraints.gridy = 1;
@@ -74,7 +77,7 @@ public class PerspectiveProjectionPanel extends JPanel {
         add(roValue, constraints);
     }
 
-    public void createButtonConstrains(GridBagConstraints constraints){
+    public void createButtonConstrains(GridBagConstraints constraints) {
         constraints.gridwidth = 2;
         constraints.gridx = 0;
         constraints.gridy = 5;
@@ -82,9 +85,9 @@ public class PerspectiveProjectionPanel extends JPanel {
     }
 
 
-    public void changeFont(JComponent[] components){
+    public void changeFont(JComponent[] components) {
         Font font = new Font("Segoe UI", Font.PLAIN, 12);
-        for (JComponent component: components){
+        for (JComponent component : components) {
             component.setFont(font);
         }
     }
@@ -100,8 +103,8 @@ public class PerspectiveProjectionPanel extends JPanel {
             field.setHorizontalAlignment(JTextField.CENTER);
     }
 
-    public double toRadians(double grad){
-        return grad*Math.PI/180;
+    public double toRadians(double grad) {
+        return grad * Math.PI / 180;
     }
 
     public class PerspectiveButtonListener implements ActionListener {
@@ -110,19 +113,23 @@ public class PerspectiveProjectionPanel extends JPanel {
             double theta = toRadians(Double.parseDouble(thetaValue.getText()));
             double fi = Double.parseDouble(fiValue.getText());
             double ro = Double.parseDouble(roValue.getText());
-            Mat helpingMatrix =  SystemOperations.createMatrix(new double[]{
+            Mat helpingMatrix = SystemOperations.createMatrix(new double[]{
                     1, 0, 0, 0,
                     0, 1, 0, 0,
-                    0, 0, 1, 1/d,
+                    0, 0, 1, 1 / d,
                     0, 0, 0, 0});
-            Mat perspectiveMatrix =  SystemOperations.createMatrix(new double[]{
-                    -Math.sin(theta), -Math.cos(fi)*Math.cos(theta), -Math.sin(fi)*Math.cos(theta), 0,
-                    Math.cos(theta), -Math.cos(fi)*Math.sin(theta), -Math.sin(fi)*Math.sin(theta), 0,
-                    0, Math.sin(fi), Math.cos(fi), 0,
-                    0, 0, ro, 0});
+            Mat perspectiveMatrix = SystemOperations.createMatrix(new double[]{
+                    -Math.sin(theta), -Math.cos(fi) * Math.cos(theta), -Math.sin(fi) * Math.cos(theta), 0,
+                    Math.cos(theta), -Math.cos(fi) * Math.sin(theta), -Math.sin(fi) * Math.sin(theta), 0,
+                    0, Math.sin(fi), -Math.cos(fi), 0,
+                    0, 0, ro, 1});
             Mat mat = SystemOperations.matrixMultiplying(helpingMatrix, perspectiveMatrix);
-            SystemOperations.getMultipliedPoints(StaticValues.cone1.getPoints(), mat);
-            SystemOperations.getMultipliedPoints(StaticValues.cone2.getPoints(), mat);
+            SystemOperations.getMultipliedPoints(StaticValues.cone1.getPoints(), perspectiveMatrix);
+            SystemOperations.getMultipliedPoints(StaticValues.cone2.getPoints(), perspectiveMatrix);
+            SystemOperations.getMultipliedPoints(StaticValues.cone1.getPoints(), helpingMatrix);
+            SystemOperations.getMultipliedPoints(StaticValues.cone2.getPoints(), helpingMatrix);
+            SystemOperations.getNormalizedPoints(StaticValues.cone1.getPoints());
+            SystemOperations.getNormalizedPoints(StaticValues.cone2.getPoints());
             GraphicsFrame.graphicsPanel.repaint();
         }
     }

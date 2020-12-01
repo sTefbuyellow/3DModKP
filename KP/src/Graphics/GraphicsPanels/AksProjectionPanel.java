@@ -1,5 +1,6 @@
 package Graphics.GraphicsPanels;
 
+import Elements.Figures.Cone;
 import Operations.SystemOperations;
 import StaticValues.StaticValues;
 import org.opencv.core.Mat;
@@ -102,10 +103,11 @@ public class AksProjectionPanel extends JPanel {
             Mat aksMatrix =  SystemOperations.createMatrix(new double[]{
                     cosFirstAngle, sinFirstAngle*sinSecondAngle, 0, 0,
                     0, cosSecondAngle, 0, 0,
-                    sinFirstAngle, -sinSecondAngle*cosFirstAngle, 0, 0,
+                    sinFirstAngle, sinSecondAngle*cosFirstAngle, 1, 0,
                     0, 0, 0, 1});
-            SystemOperations.getMultipliedPoints(StaticValues.cone1.getPoints(), aksMatrix);
-            SystemOperations.getMultipliedPoints(StaticValues.cone2.getPoints(), aksMatrix);
+            ParamPanel.createFigures();
+            SystemOperations.getMultipliedPoints(StaticValues.cone1.getCopy().getPoints(), aksMatrix);
+            SystemOperations.getMultipliedPoints(StaticValues.cone2.getCopy().getPoints(), aksMatrix);
             GraphicsFrame.graphicsPanel.repaint();
         }
     }

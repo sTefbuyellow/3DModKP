@@ -10,8 +10,10 @@ public class StaticValues {
 
     public static Cone cone1;
     public static Cone cone2;
+    public static Cone cone1Copy;
+    public static Cone cone2Copy;
     public static int width;
     public static int height;
-    public static ArrayList<Point> points = new ArrayList<Point>();
-    public static ArrayList<Edge> edges = new ArrayList<Edge>();
+    public static boolean isHorizontal = false;
+    public static boolean isProfile = false;
 }

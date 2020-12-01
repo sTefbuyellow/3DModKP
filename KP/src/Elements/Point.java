@@ -7,16 +7,11 @@ public class Point {
     private Mat coordinates;
 
     public Point(double[] coordinates){
-        this.coordinates = new Mat(4,1, CvType.CV_64F);
+        this.coordinates = new Mat(1,4, CvType.CV_64F);
         this.coordinates.put(0,0, coordinates);
     }
 
     public Mat getCoordinates(){ return coordinates; }
-
-    public void altSetCoordinates(double[] coordinates){
-        this.coordinates = new Mat(4,1, CvType.CV_64F);
-        this.coordinates.put(0,0, coordinates);
-    }
 
     public void setCoordinates(Mat coordinates){this.coordinates = coordinates;}
 
@@ -25,10 +20,15 @@ public class Point {
     }
 
     public double getY(){
-        return coordinates.get(1,0)[0];
+        return coordinates.get(0,1)[0];
     }
 
     public double getZ(){
-        return coordinates.get(2,0)[0];
+        return coordinates.get(0,2)[0];
     }
+
+    public double getD(){
+        return coordinates.get(0,3)[0];
+    }
+
 }

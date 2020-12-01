@@ -4,6 +4,7 @@ import Operations.SystemOperations;
 import StaticValues.StaticValues;
 import org.opencv.core.Mat;
 import Graphics.GraphicsFrame;
+import Graphics.DrawFigure;
 
 import javax.swing.*;
 import java.awt.*;
@@ -69,8 +70,10 @@ public class ProjectionsPanel extends JPanel {
                     0, 0, 0, 0,
                     0, 0, 1, 0,
                     0, 0, 0, 1});
+            ParamPanel.createFigures();
             SystemOperations.getMultipliedPoints(StaticValues.cone1.getPoints(), horizontalMatrix);
             SystemOperations.getMultipliedPoints(StaticValues.cone2.getPoints(), horizontalMatrix);
+            StaticValues.isHorizontal = true;
             GraphicsFrame.graphicsPanel.repaint();
         }
     }
@@ -82,6 +85,7 @@ public class ProjectionsPanel extends JPanel {
                     0, 1, 0, 0,
                     0, 0, 0, 0,
                     0, 0, 0, 1});
+            ParamPanel.createFigures();
             SystemOperations.getMultipliedPoints(StaticValues.cone1.getPoints(), horizontalMatrix);
             SystemOperations.getMultipliedPoints(StaticValues.cone2.getPoints(), horizontalMatrix);
             GraphicsFrame.graphicsPanel.repaint();
@@ -95,8 +99,10 @@ public class ProjectionsPanel extends JPanel {
                     0, 1, 0, 0,
                     0, 0, 1, 0,
                     0, 0, 0, 1});
+            ParamPanel.createFigures();
             SystemOperations.getMultipliedPoints(StaticValues.cone1.getPoints(), horizontalMatrix);
             SystemOperations.getMultipliedPoints(StaticValues.cone2.getPoints(), horizontalMatrix);
+            StaticValues.isProfile = true;
             GraphicsFrame.graphicsPanel.repaint();
         }
     }

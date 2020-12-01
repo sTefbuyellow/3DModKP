@@ -10,14 +10,20 @@ public class MovingOperations {
 
     public static void moving(ArrayList<Point> points, double dx, double dy, double dz) {
         for (Point point : points) {
-            Mat mat = SystemOperations.createMatrix(new double[]{1, 0, 0, dx, 0, 1, 0, dy,
-                    0, 0, 1, dz, 0, 0, 0, 1});
+            Mat mat = SystemOperations.createMatrix(new double[]{
+                    1, 0, 0, 0,
+                    0, 1, 0, 0,
+                    0, 0, 1, 0,
+                    dx, dy, dz, 1});
             point.setCoordinates(SystemOperations.matrixMultiplying(point.getCoordinates(), mat));
         }
     }
 
     public static Mat getMovingMat(double dx, double dy, double dz) {
-        return SystemOperations.createMatrix(new double[]{1, 0, 0, dx, 0, 1, 0, dy,
-                0, 0, 1, dz, 0, 0, 0, 1});
+        return SystemOperations.createMatrix(new double[]{
+                1, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1, 0,
+                dx, dy, dz, 1});
     }
 }

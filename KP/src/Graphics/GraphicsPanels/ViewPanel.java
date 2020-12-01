@@ -13,15 +13,7 @@ public class ViewPanel extends JPanel {
 
     public ViewPanel(){
         setBackground(new Color(220, 220, 220));
-        ActionListener listener = new Listener();
-        tempButton.addActionListener(listener);
         add(tempButton);
     }
-
-    public class Listener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            GraphicsFrame.graphicsPanel.setNeedsToBeFill(true);
-            GraphicsFrame.graphicsPanel.repaint();
-        }
-    }
+    
 }

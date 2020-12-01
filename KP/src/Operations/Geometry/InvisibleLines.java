@@ -37,10 +37,8 @@ public class InvisibleLines {
     }
 
     public Mat getResult() {
-        Mat point = new Mat(1, 4, CvType.CV_64F);
-        double[] array = new double[]{0, 0, 1000000, 1};
-        point.put(0, 0, array);
-        Mat result = SystemOperations.matrixMultiplying(vMatrix, point);
+        Mat point = getPoint();
+        Mat result = SystemOperations.matrixMultiplying(point, vMatrix);
         System.out.print(result.dump());
         if(isHole) {
             Core.multiply(result, new Scalar(-1), result);
@@ -49,5 +47,17 @@ public class InvisibleLines {
         return result;
     }
 
+    public Mat getPoint(){
+        Mat point = new Mat(1, 4, CvType.CV_64F);
+        double[] array;
+        if(StaticValues.isHorizontal)
+            array = new double[]{0, 1000000000, 0, 1};
+        else if(StaticValues.isProfile)
+            array = new double[]{100000000, 0, 0, 1};
+        else
+            array = new double[]{0, 0, 100000000, 1};
+        point.put(0, 0, array);
+        return point;
+    }
 
 }

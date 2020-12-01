@@ -15,8 +15,8 @@ public class SharpAngleProjectionPanel extends JPanel {
     JLabel titleLabel = new JLabel("Косоугольная проекция");
     JLabel angleLabel = new JLabel("Угол α (°)");
     JLabel lValueLabel = new JLabel("Параметр L");
-    JTextField angle = new JTextField("0.5");
-    JTextField lValue = new JTextField("30");
+    JTextField angle = new JTextField("45");
+    JTextField lValue = new JTextField("0.5");
     JButton refreshButton = new JButton("Построить");
 
     public SharpAngleProjectionPanel() {
@@ -104,8 +104,9 @@ public class SharpAngleProjectionPanel extends JPanel {
             Mat sharpAngleMatrix = SystemOperations.createMatrix(new double[]{
                     1, 0, 0, 0,
                     0, 1, 0, 0,
-                    l*cosAngle, l*sinAngle, 0, 0,
+                    l*cosAngle, l*sinAngle, 1, 0,
                     0, 0, 0, 1});
+            ParamPanel.createFigures();
             SystemOperations.getMultipliedPoints(StaticValues.cone1.getPoints(), sharpAngleMatrix);
             SystemOperations.getMultipliedPoints(StaticValues.cone2.getPoints(), sharpAngleMatrix);
             GraphicsFrame.graphicsPanel.repaint();
