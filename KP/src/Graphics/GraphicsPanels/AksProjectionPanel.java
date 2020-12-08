@@ -106,8 +106,8 @@ public class AksProjectionPanel extends JPanel {
                     sinFirstAngle, sinSecondAngle*cosFirstAngle, 1, 0,
                     0, 0, 0, 1});
             ParamPanel.createFigures();
-            SystemOperations.getMultipliedPoints(StaticValues.cone1.getCopy().getPoints(), aksMatrix);
-            SystemOperations.getMultipliedPoints(StaticValues.cone2.getCopy().getPoints(), aksMatrix);
+            SystemOperations.getMultipliedPoints(StaticValues.cone1.getPoints(), aksMatrix);
+            SystemOperations.getMultipliedPoints(StaticValues.cone2.getPoints(), aksMatrix);
             GraphicsFrame.graphicsPanel.repaint();
         }
     }

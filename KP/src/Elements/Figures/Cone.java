@@ -40,9 +40,18 @@ public class Cone implements Figure {
         this.approximationNumber = cone.approximationNumber;
         this.alpha = cone.alpha;
         this.flag = cone.flag;
-        this.faces = new ArrayList<>(cone.getFaces());
-        this.points = new ArrayList<>(cone.getPoints());
-        this.edges = new ArrayList<>(cone.getEdges());
+        this.points = new ArrayList<Point>();
+        this.edges = new ArrayList<Edge>();
+        this.faces = new ArrayList<Face>();
+        for(Point point: cone.points){
+            points.add(point.getCopy());
+        }
+        for(Edge edge: cone.edges){
+            edges.add(edge.getCopy());
+        }
+        for(Face face: cone.faces){
+            faces.add(face.getCopy());
+        }
     }
 
     public ArrayList<Point> getPoints() {

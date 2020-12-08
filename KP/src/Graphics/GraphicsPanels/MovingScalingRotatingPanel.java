@@ -1,5 +1,6 @@
 package Graphics.GraphicsPanels;
 
+import Elements.Point;
 import Operations.Geometry.MovingOperations;
 import Operations.Geometry.RotationOperations;
 import Operations.Geometry.ScalingOperations;
@@ -169,6 +170,8 @@ public class MovingScalingRotatingPanel extends JPanel{
             Mat matrix = getMultipliedMatrix(new Mat[]{xRotation, yRotation, zRotation, moving, scaling});
             SystemOperations.getMultipliedPoints(StaticValues.cone1.getPoints(), matrix);
             SystemOperations.getMultipliedPoints(StaticValues.cone2.getPoints(), matrix);
+            StaticValues.cone1Copy = StaticValues.cone1.getCopy();
+            StaticValues.cone2Copy = StaticValues.cone2.getCopy();
             GraphicsFrame.graphicsPanel.repaint();
         }
     }

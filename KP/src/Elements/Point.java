@@ -31,4 +31,7 @@ public class Point {
         return coordinates.get(0,3)[0];
     }
 
+    public Point getCopy(){
+        return new Point(new double[]{getX(), getY(), getZ(), getD()});
+    }
 }

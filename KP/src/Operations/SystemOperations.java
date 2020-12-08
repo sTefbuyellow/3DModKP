@@ -56,8 +56,26 @@ public class SystemOperations {
             values[1] = point.getY() / point.getD();
             values[2] = point.getZ() / point.getD();
             values[3] = 1;
-            Mat temp = new Mat(1,4, CvType.CV_64F);
-            temp.put(0,0,values);
+            Mat temp = new Mat(1, 4, CvType.CV_64F);
+            temp.put(0, 0, values);
+            point.setCoordinates(temp);
+        }
+    }
+
+    public static void getNormalizedZ(ArrayList<Point> points) {
+        for (Point point : points) {
+            double[] values = new double[4];
+            values[0] = point.getX();
+            values[1] = point.getY();
+            values[3] = 1;
+            Mat temp = new Mat(1, 4, CvType.CV_64F);
+            if (point.getZ() < 0.1 && point.getZ() >= 0)
+                values[2] = 0.1;
+            else if (point.getZ() > -0.1 && point.getZ() < 0)
+                values[2] = -0.1;
+            else
+                values[2] = point.getZ();
+            temp.put(0, 0, values);
             point.setCoordinates(temp);
         }
     }

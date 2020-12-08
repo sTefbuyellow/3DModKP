@@ -123,6 +123,8 @@ public class ParamPanel extends JPanel {
                 Integer.parseInt(approximationNumber1.getText()), false);
         StaticValues.cone2 = new Cone(Double.parseDouble(height.getText()), Double.parseDouble(radius2.getText()),
                 Integer.parseInt(approximationNumber2.getText()), true);
+        StaticValues.isHorizontal = false;
+        StaticValues.isProfile = false;
     }
 
     public void setJTextFieldAlignment(JTextField[] fields) {
@@ -133,8 +135,6 @@ public class ParamPanel extends JPanel {
     public class RefreshButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             createFigures();
-            StaticValues.isHorizontal = false;
-            StaticValues.isProfile = false;
             GraphicsFrame.graphicsPanel.repaint();
         }
     }

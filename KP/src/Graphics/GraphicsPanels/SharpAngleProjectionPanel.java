@@ -104,7 +104,7 @@ public class SharpAngleProjectionPanel extends JPanel {
             Mat sharpAngleMatrix = SystemOperations.createMatrix(new double[]{
                     1, 0, 0, 0,
                     0, 1, 0, 0,
-                    l*cosAngle, l*sinAngle, 1, 0,
+                    l*cosAngle, l*sinAngle, 0, 0,
                     0, 0, 0, 1});
             ParamPanel.createFigures();
             SystemOperations.getMultipliedPoints(StaticValues.cone1.getPoints(), sharpAngleMatrix);

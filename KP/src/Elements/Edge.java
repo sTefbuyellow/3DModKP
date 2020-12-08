@@ -24,4 +24,8 @@ public class Edge {
     public void setPoint2(Point point2) {
         this.point2 = point2;
     }
+
+    public Edge getCopy(){
+        return new Edge(getPoint1().getCopy(), getPoint2().getCopy());
+    }
 }
